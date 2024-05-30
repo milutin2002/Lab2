@@ -14,14 +14,14 @@ namespace Projekat1.Services
         public static FileInfo findFile(string name, string ext)
         {
             var list = new DirectoryInfo("./").GetFiles("*",SearchOption.AllDirectories).Where(b=>b.Name.EndsWith(".gif") || b.Name.EndsWith(".png") || b.Name.EndsWith(".jpg"));
-            var file = list.Where(b => b.Name == name + ext).ToList();
-            if (file.Count > 0)
+            var file = list.FirstOrDefault(b => b.Name == name + ext);
+            if (file!=null)
             {
-                return new FileInfo(name,file[0].DirectoryName,ext);
+                return new FileInfo(name,file.DirectoryName,ext);
             }
 
-            var fileName = list.Where(b => b.Name.StartsWith(name)).ToList();
-            if (fileName.Count > 0)
+            var fileName = list.FirstOrDefault(b => b.Name.StartsWith(name+"."));
+            if (fileName!=null)
             {
                 throw new BadExtensionExcpetion();   
             }

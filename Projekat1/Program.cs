@@ -14,7 +14,10 @@ namespace Projekat1
         public static async Task Main(string[] args)
         {
             HttpServer server = new HttpServer("http://localhost:5050/");
-            await server.start();
+            server.start();
+            Console.WriteLine("Server started.");
+            Console.ReadKey();
+            await server.stop();
         }
     }
 }
